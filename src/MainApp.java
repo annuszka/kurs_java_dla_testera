@@ -1,25 +1,21 @@
-import model.Bug;
-import model.User;
+import model.computer.Laptop;
+import model.computer.PC;
 
 public class MainApp {
     public static void main(String[] args) {
 
-        Bug bug1 = new Bug("Small issue", "reporter@bug.test", 1);
-        bug1.showAllBugInfo();
-        bug1.showBugStatus();
-        bug1.showEmail();
-        int bugPriority = bug1.getBugPriority();
-        System.out.println(bugPriority);
+        PC officeComputer = new PC("Office computer", "HP", 500,128);
+        Laptop laptop = new Laptop("Laptop", "Lenovo", 500,128, 50);
 
-        bug1.setBugDescription("test");
-        bug1.showAllBugInfo();
+        officeComputer.showCompterName();
+        officeComputer.switchOn();
+        System.out.println(officeComputer.getState());
+        officeComputer.setPowerSupply(true);
+        officeComputer.switchOn();
+        System.out.println(officeComputer.getState());
 
-        User user1 = new User("Laura", "Palmer", "laura@twinpeaks.com", 18 );
-        User user2 = new User("Laura", "Palmer", "laura@twinpeaks.com", 18 );
-
-        System.out.println(user1.isUserAdult());
-        System.out.println(User.getUserCounter());
-        System.out.println(user1);
-        System.out.println(user1.equals(user2));
+        laptop.setBatteryLevel(0);
+        laptop.switchOn();
+        System.out.println(laptop.getState());
     }
 }
