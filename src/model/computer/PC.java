@@ -13,6 +13,17 @@ public class PC extends Computer {
         isPowerSupply = powerSupply;
     }
 
+    @Override
+    public int volumeUp() {
+        return volumeLevel += 1;
+    }
+
+    @Override
+    public int volumeDown() {
+        volumeLevel -=1;
+        return volumeLevel <=0 ? 0 : volumeLevel;
+    }
+
     public void showCompterName() {
         System.out.println(name);
     }

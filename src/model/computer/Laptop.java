@@ -28,4 +28,15 @@ public class Laptop extends Computer{
     public void setBatteryLevel(int newBatteryLevel) {
         this.batteryLevel = newBatteryLevel;
     }
+
+    @Override
+    public int volumeUp() {
+        return volumeLevel += 5;
+    }
+
+    @Override
+    public int volumeDown() {
+        volumeLevel -=2;
+        return volumeLevel <=0 ? 0 : volumeLevel;
+    }
 }

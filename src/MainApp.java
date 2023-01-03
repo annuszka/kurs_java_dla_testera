@@ -20,5 +20,12 @@ public class MainApp {
         officeComputer.showCompterName();
         //rzutowanie referencji na inny typ zeby dostac sie do metody ktora jest tylko w klasie PC
         ((PC) officeComputer2).showCompterName();
+
+        System.out.println(officeComputer.volumeUp());
+        System.out.println(officeComputer.volumeUp());
+        System.out.println(officeComputer.volumeDown());
+        System.out.println(officeComputer.volumeDown());
+        System.out.println(officeComputer.volumeDown());
+
     }
 }
