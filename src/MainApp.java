@@ -1,5 +1,3 @@
-import model.Bug;
-import model.User;
 import model.computer.PC;
 
 public class MainApp {
