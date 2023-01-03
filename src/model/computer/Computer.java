@@ -48,6 +48,7 @@ public class Computer {
     }
 
     public void switchOn() {
+        System.out.println("set state to true");
         this.state = true;
     }
 
