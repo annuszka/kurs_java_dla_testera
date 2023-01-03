@@ -1,6 +1,6 @@
 package model.computer;
 
-public class Laptop extends Computer{
+public class Laptop extends Computer {
 
     private int batteryLevel;
 
@@ -35,8 +35,26 @@ public class Laptop extends Computer{
     }
 
     @Override
+    public int volumeUp(int newVolumeLevel) {
+        volumeLevel = volumeLevel + newVolumeLevel;
+        if (volumeLevel >= 100) {
+            volumeLevel = 100;
+        }
+        return volumeLevel;
+    }
+
+    @Override
     public int volumeDown() {
-        volumeLevel -=2;
-        return volumeLevel <=0 ? 0 : volumeLevel;
+        volumeLevel -= 2;
+        return volumeLevel <= 0 ? 0 : volumeLevel;
+    }
+
+    @Override
+    public int volumeDown(int newVolumeLevel) {
+        volumeLevel = volumeLevel - newVolumeLevel;
+        if (volumeLevel <= 0) {
+            volumeLevel = 0;
+        }
+        return volumeLevel;
     }
 }

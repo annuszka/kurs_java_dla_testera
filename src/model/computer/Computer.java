@@ -49,6 +49,10 @@ abstract public class Computer {
         this.ram = ram;
     }
 
+    public int getVolumeLevel() {
+        return volumeLevel;
+    }
+
     public void switchOn() {
         System.out.println("set state to true");
         state = true;
@@ -65,5 +69,9 @@ abstract public class Computer {
 
     public abstract int volumeUp();
 
+    public abstract int volumeUp(int newVolumeLevel);
+
     public abstract int volumeDown();
+
+    public abstract int volumeDown(int newVolumeLevel);
 }

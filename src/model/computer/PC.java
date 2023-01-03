@@ -19,9 +19,27 @@ public class PC extends Computer {
     }
 
     @Override
+    public int volumeUp(int newVolumeLevel) {
+        volumeLevel = volumeLevel + newVolumeLevel;
+        if (volumeLevel >= 100) {
+            volumeLevel = 100;
+        }
+        return volumeLevel;
+    }
+
+    @Override
     public int volumeDown() {
-        volumeLevel -=1;
-        return volumeLevel <=0 ? 0 : volumeLevel;
+        volumeLevel -= 1;
+        return volumeLevel <= 0 ? 0 : volumeLevel;
+    }
+
+    @Override
+    public int volumeDown(int newVolumeLevel) {
+        volumeLevel = volumeLevel - newVolumeLevel;
+        if (volumeLevel <= 0) {
+            volumeLevel = 0;
+        }
+        return volumeLevel;
     }
 
     public void showCompterName() {

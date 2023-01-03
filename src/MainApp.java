@@ -27,5 +27,16 @@ public class MainApp {
         System.out.println(officeComputer.volumeDown());
         System.out.println(officeComputer.volumeDown());
 
+        officeComputer3.volumeUp();
+        System.out.println(officeComputer3.getVolumeLevel());
+        officeComputer3.volumeUp(50);
+        System.out.println(officeComputer3.getVolumeLevel());
+        officeComputer3.volumeUp(50);
+        System.out.println(officeComputer3.getVolumeLevel());
+
+        officeComputer3.volumeDown(10);
+        System.out.println(officeComputer3.getVolumeLevel());
+        officeComputer3.volumeDown(100);
+        System.out.println(officeComputer3.getVolumeLevel());
     }
 }
