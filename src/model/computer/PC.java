@@ -9,4 +9,10 @@ public class PC extends Computer {
     public void showCompterName() {
         System.out.println(name);
     }
+
+    @Override
+    public void switchOn() {
+        System.out.println("Checking power supply");
+        super.switchOn();
+    }
 }
