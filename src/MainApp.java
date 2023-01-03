@@ -9,8 +9,12 @@ public class MainApp {
 
         officeComputer.showCompterName();
         officeComputer.switchOn();
-        laptop.setBatteryLevel(0);
+        System.out.println(officeComputer.getState());
+        officeComputer.setPowerSupply(true);
+        officeComputer.switchOn();
+        System.out.println(officeComputer.getState());
 
+        laptop.setBatteryLevel(0);
         laptop.switchOn();
         System.out.println(laptop.getState());
     }
