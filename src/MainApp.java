@@ -48,5 +48,7 @@ public class MainApp {
         laptop3.playVideo();
         laptop3.pauseVideo();
         laptop3.stopVideo();
+
+        laptop3.sayHello();
     }
 }

@@ -9,7 +9,7 @@ public interface Music {
     void stopMusic();
 
     //java 8 - default method (normal method with body)
-    default void sayHelloFromMusic() {
+    default void sayHello() {
         System.out.println("Hello from default music");
     }
 

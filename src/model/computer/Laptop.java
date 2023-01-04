@@ -72,6 +72,11 @@ public class Laptop extends Computer implements Music, Video{
     public void stopMusic() {
         System.out.println("STOP MUSIC");
     }
+//multiple inheritance from interface  (default method from java 8) - need to say which method we want to use from which interface
+    @Override
+    public void sayHello() {
+        Music.super.sayHello();
+    }
 
     @Override
     public void playVideo() {
