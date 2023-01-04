@@ -38,5 +38,15 @@ public class MainApp {
         System.out.println(officeComputer3.getVolumeLevel());
         officeComputer3.volumeDown(100);
         System.out.println(officeComputer3.getVolumeLevel());
+
+        Laptop laptop3 = new Laptop("Laptop 3", "Lenovo", 500, 128, 50);
+
+        laptop3.playMusic();
+        laptop3.pauseMusic();
+        laptop3.stopMusic();
+
+        laptop3.playVideo();
+        laptop3.pauseVideo();
+        laptop3.stopVideo();
     }
 }
