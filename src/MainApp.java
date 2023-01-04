@@ -102,36 +102,51 @@ public class MainApp {
 //        System.out.println(users);
 
         //set - unique objects, treeset to sort
-        Set<String> names = new HashSet<>();
-        names.add("Pikuś");
-        names.add("Pixie");
-        names.add("Pikuś");
-        names.add("Pikuś");
-        names.add("Pik");
-        names.add("Atos");
-        names.add("Azorek");
-        names.add("Jess");
-        System.out.println(names.size());
-        for (String name : names) {
-            System.out.println(name);
-        }
-        Set<String> sortedNames = new TreeSet<>(names);
-        System.out.println("sorted set:");
-        for (String name : sortedNames) {
-            System.out.println(name);
-        }
-        //set with objects
-        Set<User> users = new HashSet<>();
-        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
-        users.add(new User("Helena", "Testowa", "ala@test.pl", 28));
-        users.add(new User("Bożena", "Testowa", "ala@test.pl", 40));
-        users.add(new User("Kuba", "Klaun", "ala@test.pl", 35));
-        users.add(new User("Michał", "Testowy", "ala@test.pl", 31));
-        // in order to sort we need to use comparable interface in user class and overwrite compareTo method
-        Set<User> sortedUsers = new TreeSet<>(users);
-        for (User user : sortedUsers) {
-            user.getFullName();
-        }
+//        Set<String> names = new HashSet<>();
+//        names.add("Pikuś");
+//        names.add("Pixie");
+//        names.add("Pikuś");
+//        names.add("Pikuś");
+//        names.add("Pik");
+//        names.add("Atos");
+//        names.add("Azorek");
+//        names.add("Jess");
+//        System.out.println(names.size());
+//        for (String name : names) {
+//            System.out.println(name);
+//        }
+//        Set<String> sortedNames = new TreeSet<>(names);
+//        System.out.println("sorted set:");
+//        for (String name : sortedNames) {
+//            System.out.println(name);
+//        }
+//        //set with objects
+//        Set<User> users = new HashSet<>();
+//        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+//        users.add(new User("Helena", "Testowa", "ala@test.pl", 28));
+//        users.add(new User("Bożena", "Testowa", "ala@test.pl", 40));
+//        users.add(new User("Kuba", "Klaun", "ala@test.pl", 35));
+//        users.add(new User("Michał", "Testowy", "ala@test.pl", 31));
+//        // in order to sort we need to use comparable interface in user class and overwrite compareTo method
+//        Set<User> sortedUsers = new TreeSet<>(users);
+//        for (User user : sortedUsers) {
+//            user.getFullName();
+//        }
+        //map - hashset when we don't care about order, LinkedHashMap - in order of adding, treemap - can be sorted
+        Map<Integer, String> names = new LinkedHashMap<>();
+        names.put(1, "Bartek1");
+        names.put(10, "Bartek10");
+        names.put(20, "Bartek20");
+        names.put(0, "Bartek0");
+        names.put(5, "Bartek5");
 
+        for (Map.Entry<Integer, String> entry : names.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+        System.out.println("sorted map");
+        Map<Integer, String> sortedNames = new TreeMap<>(names);
+        for (Map.Entry<Integer, String> entry : sortedNames.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
     }
 }
