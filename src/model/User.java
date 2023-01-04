@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class User {
+public class User implements Comparable<User> {
     private static int userCounter = 0;
 
     private String firstName;
@@ -28,11 +28,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLasttName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLasttName(String lasttName) {
+    public void setLastName(String lasttName) {
         this.lastName = lasttName;
     }
 
@@ -107,5 +107,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, email, age, isAdult);
+    }
+//this method will return 0 if they are the same
+    @Override
+    public int compareTo(User user) {
+        int comparedResult = this.getFirstName().compareTo(user.getFirstName());
+        if (comparedResult == 0) {
+            comparedResult = this.getLastName().compareTo(user.getLastName());
+        }
+        return comparedResult;
     }
 }

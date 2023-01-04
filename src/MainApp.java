@@ -3,10 +3,7 @@ import model.BugReporter;
 import model.User;
 import model.computer.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -89,19 +86,52 @@ public class MainApp {
 //        Collections.reverse(names);
 //        System.out.println(names);
 //array list:
-        List<User> users = new ArrayList<>();
+//        List<User> users = new ArrayList<>();
+//        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+//        users.add(new User("Helena", "Testowa", "ala@test.pl", 28));
+//        users.add(new User("Bożena", "Testowa", "ala@test.pl", 40));
+//        users.add(new User("Kuba", "Testowa", "ala@test.pl", 35));
+//        users.add(new User("Michał", "Testowy", "ala@test.pl", 31));
+//        for (User user : users) {
+//            System.out.println(user.getFirstName());
+//        }
+//
+//        Collections.sort(users, Comparator.comparing(User::getFirstName));
+//        System.out.println(users);
+//        Collections.sort(users, Comparator.comparingInt(User::getAge).reversed());
+//        System.out.println(users);
+
+        //set - unique objects, treeset to sort
+        Set<String> names = new HashSet<>();
+        names.add("Pikuś");
+        names.add("Pixie");
+        names.add("Pikuś");
+        names.add("Pikuś");
+        names.add("Pik");
+        names.add("Atos");
+        names.add("Azorek");
+        names.add("Jess");
+        System.out.println(names.size());
+        for (String name : names) {
+            System.out.println(name);
+        }
+        Set<String> sortedNames = new TreeSet<>(names);
+        System.out.println("sorted set:");
+        for (String name : sortedNames) {
+            System.out.println(name);
+        }
+        //set with objects
+        Set<User> users = new HashSet<>();
         users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
         users.add(new User("Helena", "Testowa", "ala@test.pl", 28));
         users.add(new User("Bożena", "Testowa", "ala@test.pl", 40));
-        users.add(new User("Kuba", "Testowa", "ala@test.pl", 35));
+        users.add(new User("Kuba", "Klaun", "ala@test.pl", 35));
         users.add(new User("Michał", "Testowy", "ala@test.pl", 31));
-        for (User user : users) {
-            System.out.println(user.getFirstName());
+        // in order to sort we need to use comparable interface in user class and overwrite compareTo method
+        Set<User> sortedUsers = new TreeSet<>(users);
+        for (User user : sortedUsers) {
+            user.getFullName();
         }
 
-        Collections.sort(users, Comparator.comparing(User::getFirstName));
-        System.out.println(users);
-        Collections.sort(users, Comparator.comparingInt(User::getAge).reversed());
-        System.out.println(users);
     }
 }
