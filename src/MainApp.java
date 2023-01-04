@@ -133,20 +133,47 @@ public class MainApp {
 //            user.getFullName();
 //        }
         //map - hashset when we don't care about order, LinkedHashMap - in order of adding, treemap - can be sorted
-        Map<Integer, String> names = new LinkedHashMap<>();
-        names.put(1, "Bartek1");
-        names.put(10, "Bartek10");
-        names.put(20, "Bartek20");
-        names.put(0, "Bartek0");
-        names.put(5, "Bartek5");
-
-        for (Map.Entry<Integer, String> entry : names.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+//        Map<Integer, String> names = new LinkedHashMap<>();
+//        names.put(1, "Bartek1");
+//        names.put(10, "Bartek10");
+//        names.put(20, "Bartek20");
+//        names.put(0, "Bartek0");
+//        names.put(5, "Bartek5");
+//
+//        for (Map.Entry<Integer, String> entry : names.entrySet()) {
+//            System.out.println(entry.getKey() + " " + entry.getValue());
+//        }
+//        System.out.println("sorted map");
+//        Map<Integer, String> sortedNames = new TreeMap<>(names);
+//        for (Map.Entry<Integer, String> entry : sortedNames.entrySet()) {
+//            System.out.println(entry.getKey() + " " + entry.getValue());
+//        }
+        //exercise
+        List<Bug> bugsList = new ArrayList<>();
+        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
+                "clown@nt.no"), 1));
+        bugsList.add(new Bug("Some issue", new BugReporter("Bernard", "Clown",
+                "clown@nt.no"), 2));
+        bugsList.add(new Bug("500 error", new BugReporter("Arnold", "Crown",
+                "arn@nt.no"), 5));
+        bugsList.add(new Bug("S WORKING!!!", new BugReporter("Frank", "Slow",
+                "frank@test.pl"), 1));
+        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
+                "clown@nt.no"), 1));
+        for (Bug bug : bugsList) {
+            System.out.println(bug.getBugDescription());
         }
-        System.out.println("sorted map");
-        Map<Integer, String> sortedNames = new TreeMap<>(names);
-        for (Map.Entry<Integer, String> entry : sortedNames.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+        System.out.println("set: ");
+        //we want to eliminate duplicates: (it won't work if we don't have equals and hash methods
+        Set<Bug> bugSet = new HashSet<>(bugsList);
+        for (Bug bug : bugSet) {
+            System.out.println(bug.getBugDescription());
+        }
+        //sort
+        Set<Bug> bugsTreeSet = new TreeSet<>(bugSet);
+        System.out.println("tree set:");
+        for (Bug bug : bugsTreeSet) {
+            System.out.println(bug.getBugDescription());
         }
     }
 }
