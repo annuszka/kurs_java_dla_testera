@@ -2,6 +2,9 @@ import model.computer.Computer;
 import model.computer.Laptop;
 import model.computer.PC;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainApp {
     public static void main(String[] args) {
         //polimorfizm - do jednego typu referencji przypisane rozne formy obiektu, po lewe klasa najwyzej w hierarchii, po prawej klasy po niej dziedziczace
@@ -50,5 +53,17 @@ public class MainApp {
         laptop3.stopVideo();
 
         laptop3.sayHello();
+
+        int number = 10;
+        //boxing - convert primitive type to wrapper class
+        Integer intNumber = Integer.valueOf(10);
+        System.out.println(intNumber);
+        Integer newInt = 10;
+        System.out.println(newInt);
+
+        //unboxing - object to primitive type
+        int intValue = intNumber.intValue();
+//reference types needed for example in lists etc
+        List<Integer> numbers= new ArrayList<>();
     }
 }
