@@ -1,9 +1,11 @@
 import model.Bug;
 import model.BugReporter;
+import model.User;
 import model.computer.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainApp {
@@ -65,26 +67,41 @@ public class MainApp {
 //        System.out.println(bug);
 //        bug.setBugStatus(true);
 //        System.out.println(bug);
-        List<String> names = new ArrayList<>();
-        names.add("Pixie");
-        names.add("Jess");
-        names.add("Bulwa");
-        names.add("Macchi");
-        names.add("Mela");
-        names.add("Chalka");
-
-        System.out.println(names);
-        System.out.println(names.contains("Pixie"));
-        System.out.println(names.isEmpty());
-        System.out.println("First name on the list: " + names.get(0));
-        names.remove(names.size()-1);
-        for (String name: names) {
-            System.out.println(name);
+//        List<String> names = new ArrayList<>();
+//        names.add("Pixie");
+//        names.add("Jess");
+//        names.add("Bulwa");
+//        names.add("Macchi");
+//        names.add("Mela");
+//        names.add("Chalka");
+//
+//        System.out.println(names);
+//        System.out.println(names.contains("Pixie"));
+//        System.out.println(names.isEmpty());
+//        System.out.println("First name on the list: " + names.get(0));
+//        names.remove(names.size() - 1);
+//        for (String name : names) {
+//            System.out.println(name);
+//        }
+//
+//        Collections.sort(names);
+//        System.out.println(names);
+//        Collections.reverse(names);
+//        System.out.println(names);
+//array list:
+        List<User> users = new ArrayList<>();
+        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+        users.add(new User("Helena", "Testowa", "ala@test.pl", 28));
+        users.add(new User("Bożena", "Testowa", "ala@test.pl", 40));
+        users.add(new User("Kuba", "Testowa", "ala@test.pl", 35));
+        users.add(new User("Michał", "Testowy", "ala@test.pl", 31));
+        for (User user : users) {
+            System.out.println(user.getFirstName());
         }
 
-        Collections.sort(names);
-        System.out.println(names);
-        Collections.reverse(names);
-        System.out.println(names);
+        Collections.sort(users, Comparator.comparing(User::getFirstName));
+        System.out.println(users);
+        Collections.sort(users, Comparator.comparingInt(User::getAge).reversed());
+        System.out.println(users);
     }
 }
