@@ -1,14 +1,14 @@
 package model;
 
-public class Bug {
+public class Bug implements ConsoleNotification{
     private String bugDescription;
-    private String email;
+    private BugReporter bugReporter;
     private int bugPriority;
     private boolean bugStatus;
 
-    public Bug(String bugDescription, String email, int bugPriority) {
+    public Bug(String bugDescription, BugReporter bugReporter, int bugPriority) {
         this.bugDescription = bugDescription;
-        this.email = email;
+        this.bugReporter = bugReporter;
         this.bugPriority = bugPriority;
         this.bugStatus = false;
     }
@@ -25,17 +25,12 @@ public class Bug {
         }
     }
 
-    public String getEmail() {
-        return email;
+    public BugReporter getBugReporter() {
+        return bugReporter;
     }
 
-    public void setEmail(String email) {
-
-        if(!email.contains("@")) {
-            System.out.println("Incorrect email format");
-        } else {
-            this.email = email;
-        }
+    public void setBugReporter(BugReporter bugReporter) {
+        this.bugReporter = bugReporter;
     }
 
     public void setBugPriority(int bugPriority) {
@@ -58,16 +53,12 @@ public class Bug {
     }
 
     public void setBugStatus(boolean bugStatus) {
+        notifyStatusChange();
         this.bugStatus = bugStatus;
     }
 
-    public void showAllBugInfo() {
-        System.out.println("Bug description: " + bugDescription + " email: " + email + " bug priority: " + bugPriority
-                + " bug status: " + bugStatus);
-    }
-
     public void showEmail() {
-        System.out.println("Reporter email: " + email);
+        System.out.println("Reporter email: " + bugReporter.getEmail());
     }
 
     public void showBugStatus() {
@@ -76,5 +67,20 @@ public class Bug {
 
     public int getBugPriority() {
         return bugPriority;
+    }
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "bugDescription='" + bugDescription + '\'' +
+                ", bugReporter=" + bugReporter +
+                ", bugPriority=" + bugPriority +
+                ", bugStatus=" + bugStatus +
+                '}';
+    }
+
+    @Override
+    public void notifyStatusChange() {
+        System.out.println("!!! Bug status has changed !!!");
     }
 }

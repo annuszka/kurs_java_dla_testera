@@ -1,3 +1,5 @@
+import model.Bug;
+import model.BugReporter;
 import model.computer.*;
 
 import java.util.ArrayList;
@@ -64,9 +66,18 @@ public class MainApp {
 ////reference types needed for example in lists etc
 //        List<Integer> numbers= new ArrayList<>();
 //composition - class 'has a'relation
-        Hdd hdd = new Hdd("Samsung", 500);
-        Ram ram = new Ram("AAA", 128);
-        Computer mac = new Laptop("Mac", "PRO", hdd, ram, 100);
-        System.out.println(mac.getRam().getSize());
+//        Hdd hdd = new Hdd("Samsung", 500);
+//        Ram ram = new Ram("AAA", 128);
+//        Computer mac = new Laptop("Mac", "PRO", hdd, ram, 100);
+//        System.out.println(mac.getRam().getSize());
+
+        BugReporter bugReporter = new BugReporter("User", "Testowy", "user@testowy.pl");
+        Bug bug = new Bug("Internet is not working", bugReporter, 5);
+
+        System.out.println(bug);
+
+        bug.setBugStatus(true);
+        System.out.println(bug);
+
     }
 }
