@@ -1,9 +1,11 @@
+import enums.Gender;
 import model.Bug;
 import model.BugReporter;
 import model.User;
 import model.computer.*;
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -178,86 +180,151 @@ public class MainApp {
 //            System.out.println(bug.getBugDescription());
 //        }
         //stream
-        List<String> names = new ArrayList<>();
-        names.add("Pixie");
-        names.add("Pikuś");
-        names.add("Jess");
-        names.add("Chałka");
-        names.add("Macchi");
-        names.add("Bulwa");
-        names.add("Mela");
-        names.add("Piksi");
-        names.stream().filter(str -> str.startsWith("P"))
-                .filter(str -> str.contains("Pik"))
-                .filter((str -> str.endsWith("i")))
-                .forEach(str -> System.out.println(str));
-        List<String> pikNames = names.stream().filter(s -> s.startsWith("Pi")).collect(Collectors.toList());
-        System.out.println(pikNames);
-
-        names.stream()
-                .map(str -> str.toUpperCase())
-                .forEach(str -> System.out.println(str));
-
-        names.stream()
-                .filter(str -> str.length() <=4)
-                .map(str -> "Short name: " + str)
-                .forEach(str -> System.out.println(str));
-       long count = names.stream()
-                .filter(str -> str.length() <=4)
-                .count();
-        System.out.println("Count: " + count);
-        boolean anyMatch = names.stream().anyMatch(s -> s.contains("a"));
-        boolean allMatch = names.stream().allMatch(s -> s.length() > 3);
-        boolean noneMatch = names.stream().noneMatch(s -> s.endsWith("z"));
-        System.out.println(anyMatch + " " + allMatch + " " + noneMatch);
-
-        List<User> users = new ArrayList<>();
-        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
-        users.add(new User("Ala", "Pomarańcz", "ala@test.pl", 20));
-        users.add(new User("Helena", "Xielona", "hela@test.pl", 28));
-        users.add(new User("Bożena", "Fioletowa", "boz@test.pl", 40));
-        users.add(new User("Kuba", "Biały", "kuba@test.pl", 35));
-        users.add(new User("Michał", "Czarny", "mich@test.pl", 31));
-
-        List<User> sortedUsers = users.stream()
-//                .sorted(Comparator.comparing(user -> user.getFirstName())) --> lambda can be replaced with method reference:
-                .sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName))
-                .collect(Collectors.toList());
-        for (User user : sortedUsers) {
-            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
-        }
-        //Optional type - wraps object (since java 1.8), protects from null point exception
-        Optional<User> max = users.stream().max(Comparator.comparingInt(User::getAge));
-        if (max.isPresent()) {
-            //get to extract user from optional, it can be empty so first check if present
-            System.out.println(max.get());
-        } else {
-            System.out.println("No such element found");
-        }
-
-        String ala = users.stream()
-                .map(User::getFirstName)
-                .filter(s -> s.equals("Ala"))
-                .findFirst()
-                .orElse("There is no Ala on the list");
-        System.out.println(ala);
-
-        Integer age = users.stream()
-                .map(User::getAge)
-                .max(Integer::compareTo)
-                .orElse(-1);
-        System.out.println(age);
-
-        User bartek = users.stream()
-                .filter(user -> user.getFirstName().startsWith("Bart"))
-                .findFirst()
-                .orElseGet(() -> new User("Bartek", "Nowy", "b@test.com", 25));
-        System.out.println(bartek);
+//        List<String> names = new ArrayList<>();
+//        names.add("Pixie");
+//        names.add("Pikuś");
+//        names.add("Jess");
+//        names.add("Chałka");
+//        names.add("Macchi");
+//        names.add("Bulwa");
+//        names.add("Mela");
+//        names.add("Piksi");
+//        names.stream().filter(str -> str.startsWith("P"))
+//                .filter(str -> str.contains("Pik"))
+//                .filter((str -> str.endsWith("i")))
+//                .forEach(str -> System.out.println(str));
+//        List<String> pikNames = names.stream().filter(s -> s.startsWith("Pi")).collect(Collectors.toList());
+//        System.out.println(pikNames);
+//
+//        names.stream()
+//                .map(str -> str.toUpperCase())
+//                .forEach(str -> System.out.println(str));
+//
+//        names.stream()
+//                .filter(str -> str.length() <=4)
+//                .map(str -> "Short name: " + str)
+//                .forEach(str -> System.out.println(str));
+//       long count = names.stream()
+//                .filter(str -> str.length() <=4)
+//                .count();
+//        System.out.println("Count: " + count);
+//        boolean anyMatch = names.stream().anyMatch(s -> s.contains("a"));
+//        boolean allMatch = names.stream().allMatch(s -> s.length() > 3);
+//        boolean noneMatch = names.stream().noneMatch(s -> s.endsWith("z"));
+//        System.out.println(anyMatch + " " + allMatch + " " + noneMatch);
+//
+//        List<User> users = new ArrayList<>();
+//        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+//        users.add(new User("Ala", "Pomarańcz", "ala@test.pl", 20));
+//        users.add(new User("Helena", "Xielona", "hela@test.pl", 28));
+//        users.add(new User("Bożena", "Fioletowa", "boz@test.pl", 40));
+//        users.add(new User("Kuba", "Biały", "kuba@test.pl", 35));
+//        users.add(new User("Michał", "Czarny", "mich@test.pl", 31));
+//
+//        List<User> sortedUsers = users.stream()
+////                .sorted(Comparator.comparing(user -> user.getFirstName())) --> lambda can be replaced with method reference:
+//                .sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName))
+//                .collect(Collectors.toList());
+//        for (User user : sortedUsers) {
+//            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
+//        }
+//        //Optional type - wraps object (since java 1.8), protects from null point exception
+//        Optional<User> max = users.stream().max(Comparator.comparingInt(User::getAge));
+//        if (max.isPresent()) {
+//            //get to extract user from optional, it can be empty so first check if present
+//            System.out.println(max.get());
+//        } else {
+//            System.out.println("No such element found");
+//        }
+//
+//        String ala = users.stream()
+//                .map(User::getFirstName)
+//                .filter(s -> s.equals("Ala"))
+//                .findFirst()
+//                .orElse("There is no Ala on the list");
+//        System.out.println(ala);
+//
+//        Integer age = users.stream()
+//                .map(User::getAge)
+//                .max(Integer::compareTo)
+//                .orElse(-1);
+//        System.out.println(age);
+//
+//        User bartek = users.stream()
+//                .filter(user -> user.getFirstName().startsWith("Bart"))
+//                .findFirst()
+//                .orElseGet(() -> new User("Bartek", "Nowy", "b@test.com", 25));
+//        System.out.println(bartek);
 
 //        User ula = users.stream()
 //                .filter(user -> user.getFirstName().startsWith("U"))
 //                .findFirst()
 //                .orElseThrow(() -> new IllegalStateException("There is no user with name starting with letter U on the list"));
 //        System.out.println(ula);
+        //catching exceptions
+//        try {
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));
+//            String line = bufferedReader.readLine();
+//            while (line != null) {
+//                System.out.println(line);
+//                line = bufferedReader.readLine();
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Bug bug = new Bug("hhhhh", new BugReporter("q", "q", "q@q.pl"),1);
+//        System.out.println(bug.getBugDescription());
+//        exercise
+        List<User> users = new ArrayList<>();
+        users.add(new User("Analise", "Black","ab@test.pl", 37, Gender.FEMALE));
+        users.add(new User("Bella", "Swan","ab@test.pl", 27, Gender.FEMALE));
+        users.add(new User("Archie", "Reynold","archie@test.pl", 17, Gender.MALE));
+        users.add(new User("Lilly", "Pad","lilly@test.pl", 32, Gender.FEMALE));
+        users.add(new User("Barney ", "Stinson","awesome@test.pl", 35, Gender.MALE));
+        List<User> girls = users.stream()
+                .filter(user -> user.getGender().equals(Gender.FEMALE))
+                .collect(Collectors.toList());
+        System.out.println(girls);
+//create a file with names
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("names.txt"));
+            bufferedWriter.write("Kasia");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Asia");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Jan");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Edd");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Karol");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Beata");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //read names from file and add to the list
+         List<String> readNames = new ArrayList<>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("names.txt"));
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                readNames.add(line);
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        readNames.stream()
+//                .filter(name ->name.contains("Anna"))
+//                .findFirst().orElseThrow(() ->new IllegalStateException("List does not contain name Anna"));
     }
 }
