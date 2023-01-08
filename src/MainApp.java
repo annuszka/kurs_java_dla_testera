@@ -178,81 +178,81 @@ public class MainApp {
 //            System.out.println(bug.getBugDescription());
 //        }
         //stream
-        List<String> names = new ArrayList<>();
-        names.add("Pixie");
-        names.add("Pikuś");
-        names.add("Jess");
-        names.add("Chałka");
-        names.add("Macchi");
-        names.add("Bulwa");
-        names.add("Mela");
-        names.add("Piksi");
-        names.stream().filter(str -> str.startsWith("P"))
-                .filter(str -> str.contains("Pik"))
-                .filter((str -> str.endsWith("i")))
-                .forEach(str -> System.out.println(str));
-        List<String> pikNames = names.stream().filter(s -> s.startsWith("Pi")).collect(Collectors.toList());
-        System.out.println(pikNames);
-
-        names.stream()
-                .map(str -> str.toUpperCase())
-                .forEach(str -> System.out.println(str));
-
-        names.stream()
-                .filter(str -> str.length() <=4)
-                .map(str -> "Short name: " + str)
-                .forEach(str -> System.out.println(str));
-       long count = names.stream()
-                .filter(str -> str.length() <=4)
-                .count();
-        System.out.println("Count: " + count);
-        boolean anyMatch = names.stream().anyMatch(s -> s.contains("a"));
-        boolean allMatch = names.stream().allMatch(s -> s.length() > 3);
-        boolean noneMatch = names.stream().noneMatch(s -> s.endsWith("z"));
-        System.out.println(anyMatch + " " + allMatch + " " + noneMatch);
-
-        List<User> users = new ArrayList<>();
-        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
-        users.add(new User("Ala", "Pomarańcz", "ala@test.pl", 20));
-        users.add(new User("Helena", "Xielona", "hela@test.pl", 28));
-        users.add(new User("Bożena", "Fioletowa", "boz@test.pl", 40));
-        users.add(new User("Kuba", "Biały", "kuba@test.pl", 35));
-        users.add(new User("Michał", "Czarny", "mich@test.pl", 31));
-
-        List<User> sortedUsers = users.stream()
-//                .sorted(Comparator.comparing(user -> user.getFirstName())) --> lambda can be replaced with method reference:
-                .sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName))
-                .collect(Collectors.toList());
-        for (User user : sortedUsers) {
-            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
-        }
-        //Optional type - wraps object (since java 1.8), protects from null point exception
-        Optional<User> max = users.stream().max(Comparator.comparingInt(User::getAge));
-        if (max.isPresent()) {
-            //get to extract user from optional, it can be empty so first check if present
-            System.out.println(max.get());
-        } else {
-            System.out.println("No such element found");
-        }
-
-        String ala = users.stream()
-                .map(User::getFirstName)
-                .filter(s -> s.equals("Ala"))
-                .findFirst()
-                .orElse("There is no Ala on the list");
-        System.out.println(ala);
-
-        Integer age = users.stream()
-                .map(User::getAge)
-                .max(Integer::compareTo)
-                .orElse(-1);
-        System.out.println(age);
-
-        User bartek = users.stream()
-                .filter(user -> user.getFirstName().startsWith("Bart"))
-                .findFirst()
-                .orElseGet(() -> new User("Bartek", "Nowy", "b@test.com", 25));
-        System.out.println(bartek);
+//        List<String> names = new ArrayList<>();
+//        names.add("Pixie");
+//        names.add("Pikuś");
+//        names.add("Jess");
+//        names.add("Chałka");
+//        names.add("Macchi");
+//        names.add("Bulwa");
+//        names.add("Mela");
+//        names.add("Piksi");
+//        names.stream().filter(str -> str.startsWith("P"))
+//                .filter(str -> str.contains("Pik"))
+//                .filter((str -> str.endsWith("i")))
+//                .forEach(str -> System.out.println(str));
+//        List<String> pikNames = names.stream().filter(s -> s.startsWith("Pi")).collect(Collectors.toList());
+//        System.out.println(pikNames);
+//
+//        names.stream()
+//                .map(str -> str.toUpperCase())
+//                .forEach(str -> System.out.println(str));
+//
+//        names.stream()
+//                .filter(str -> str.length() <=4)
+//                .map(str -> "Short name: " + str)
+//                .forEach(str -> System.out.println(str));
+//       long count = names.stream()
+//                .filter(str -> str.length() <=4)
+//                .count();
+//        System.out.println("Count: " + count);
+//        boolean anyMatch = names.stream().anyMatch(s -> s.contains("a"));
+//        boolean allMatch = names.stream().allMatch(s -> s.length() > 3);
+//        boolean noneMatch = names.stream().noneMatch(s -> s.endsWith("z"));
+//        System.out.println(anyMatch + " " + allMatch + " " + noneMatch);
+//
+//        List<User> users = new ArrayList<>();
+//        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+//        users.add(new User("Ala", "Pomarańcz", "ala@test.pl", 20));
+//        users.add(new User("Helena", "Xielona", "hela@test.pl", 28));
+//        users.add(new User("Bożena", "Fioletowa", "boz@test.pl", 40));
+//        users.add(new User("Kuba", "Biały", "kuba@test.pl", 35));
+//        users.add(new User("Michał", "Czarny", "mich@test.pl", 31));
+//
+//        List<User> sortedUsers = users.stream()
+////                .sorted(Comparator.comparing(user -> user.getFirstName())) --> lambda can be replaced with method reference:
+//                .sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName))
+//                .collect(Collectors.toList());
+//        for (User user : sortedUsers) {
+//            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
+//        }
+//        //Optional type - wraps object (since java 1.8), protects from null point exception
+//        Optional<User> max = users.stream().max(Comparator.comparingInt(User::getAge));
+//        if (max.isPresent()) {
+//            //get to extract user from optional, it can be empty so first check if present
+//            System.out.println(max.get());
+//        } else {
+//            System.out.println("No such element found");
+//        }
+//
+//        String ala = users.stream()
+//                .map(User::getFirstName)
+//                .filter(s -> s.equals("Ala"))
+//                .findFirst()
+//                .orElse("There is no Ala on the list");
+//        System.out.println(ala);
+//
+//        Integer age = users.stream()
+//                .map(User::getAge)
+//                .max(Integer::compareTo)
+//                .orElse(-1);
+//        System.out.println(age);
+//
+//        User bartek = users.stream()
+//                .filter(user -> user.getFirstName().startsWith("Bart"))
+//                .findFirst()
+//                .orElseGet(() -> new User("Bartek", "Nowy", "b@test.com", 25));
+//        System.out.println(bartek);
 
 //        User ula = users.stream()
 //                .filter(user -> user.getFirstName().startsWith("U"))
