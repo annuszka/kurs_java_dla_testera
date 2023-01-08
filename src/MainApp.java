@@ -1,13 +1,11 @@
+import enums.Gender;
 import model.Bug;
 import model.BugReporter;
 import model.User;
 import model.computer.*;
 import org.w3c.dom.ls.LSOutput;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -264,10 +262,59 @@ public class MainApp {
 //                .orElseThrow(() -> new IllegalStateException("There is no user with name starting with letter U on the list"));
 //        System.out.println(ula);
         //catching exceptions
+//        try {
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));
+//            String line = bufferedReader.readLine();
+//            while (line != null) {
+//                System.out.println(line);
+//                line = bufferedReader.readLine();
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Bug bug = new Bug("hhhhh", new BugReporter("q", "q", "q@q.pl"),1);
+//        System.out.println(bug.getBugDescription());
+//        exercise
+        List<User> users = new ArrayList<>();
+        users.add(new User("Analise", "Black","ab@test.pl", 37, Gender.FEMALE));
+        users.add(new User("Bella", "Swan","ab@test.pl", 27, Gender.FEMALE));
+        users.add(new User("Archie", "Reynold","archie@test.pl", 17, Gender.MALE));
+        users.add(new User("Lilly", "Pad","lilly@test.pl", 32, Gender.FEMALE));
+        users.add(new User("Barney ", "Stinson","awesome@test.pl", 35, Gender.MALE));
+        List<User> girls = users.stream()
+                .filter(user -> user.getGender().equals(Gender.FEMALE))
+                .collect(Collectors.toList());
+        System.out.println(girls);
+//create a file with names
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("names.txt"));
+            bufferedWriter.write("Kasia");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Asia");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Jan");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Edd");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Karol");
+            bufferedWriter.newLine();
+            bufferedWriter.write("Beata");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //read names from file and add to the list
+         List<String> readNames = new ArrayList<>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("names.txt"));
             String line = bufferedReader.readLine();
+
             while (line != null) {
+                readNames.add(line);
                 System.out.println(line);
                 line = bufferedReader.readLine();
             }
@@ -276,10 +323,8 @@ public class MainApp {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Bug bug = new Bug("hhhhh", new BugReporter("q", "q", "q@q.pl"),1);
-        System.out.println(bug.getBugDescription());
-
-
+//        readNames.stream()
+//                .filter(name ->name.contains("Anna"))
+//                .findFirst().orElseThrow(() ->new IllegalStateException("List does not contain name Anna"));
     }
 }

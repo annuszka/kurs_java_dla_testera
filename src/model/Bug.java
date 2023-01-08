@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.IllegalBugPriorityException;
+
 import java.util.Objects;
 
 public class Bug implements ConsoleNotification, Comparable<Bug> {
@@ -35,7 +37,7 @@ public class Bug implements ConsoleNotification, Comparable<Bug> {
         this.bugReporter = bugReporter;
     }
 
-    public void setBugPriority(int bugPriority) {
+    public void setBugPriority(int bugPriority) throws IllegalBugPriorityException {
         switch (bugPriority) {
             case 1:
             case 2:
@@ -45,7 +47,7 @@ public class Bug implements ConsoleNotification, Comparable<Bug> {
                 this.bugPriority = bugPriority;
                 break;
             default:
-                System.out.println("Incorrect bug priority range");
+                throw new IllegalBugPriorityException("Incorrect bug priority range");
         }
 
     }

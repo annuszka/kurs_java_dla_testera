@@ -1,5 +1,6 @@
 package model;
 
+import enums.Gender;
 import exceptions.IllegalEmailFormatException;
 
 import java.util.Objects;
@@ -12,6 +13,7 @@ public class User implements Comparable<User> {
     private String email;
     private int age;
     private boolean isAdult;
+    private Gender gender;
 
     public User(String firstName, String lasttName, String email, int age) {
         this.firstName = firstName;
@@ -19,6 +21,16 @@ public class User implements Comparable<User> {
         this.email = email;
         this.age = age;
         this.isAdult = isUserAdult();
+        userCounter++;
+    }
+
+    public User(String firstName, String lasttName, String email, int age, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lasttName;
+        this.email = email;
+        this.age = age;
+        this.isAdult = isUserAdult();
+        this.gender = gender;
         userCounter++;
     }
 
@@ -32,6 +44,14 @@ public class User implements Comparable<User> {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public void setLastName(String lasttName) {
