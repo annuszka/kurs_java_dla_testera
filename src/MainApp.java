@@ -4,6 +4,10 @@ import model.User;
 import model.computer.*;
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -259,5 +263,23 @@ public class MainApp {
 //                .findFirst()
 //                .orElseThrow(() -> new IllegalStateException("There is no user with name starting with letter U on the list"));
 //        System.out.println(ula);
+        //catching exceptions
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Bug bug = new Bug("hhhhh", new BugReporter("q", "q", "q@q.pl"),1);
+        System.out.println(bug.getBugDescription());
+
+
     }
 }

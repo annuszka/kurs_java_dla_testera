@@ -41,7 +41,11 @@ public class User implements Comparable<User> {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Incorrect email format");
+        } else {
+            this.email = email;
+        }
     }
 
     public int getAge() {
@@ -108,7 +112,8 @@ public class User implements Comparable<User> {
     public int hashCode() {
         return Objects.hash(firstName, lastName, email, age, isAdult);
     }
-//this method will return 0 if they are the same
+
+    //this method will return 0 if they are the same
     @Override
     public int compareTo(User user) {
         int comparedResult = this.getFirstName().compareTo(user.getFirstName());
