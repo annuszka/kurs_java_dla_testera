@@ -226,5 +226,38 @@ public class MainApp {
         for (User user : sortedUsers) {
             System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
         }
+        //Optional type - wraps object (since java 1.8), protects from null point exception
+        Optional<User> max = users.stream().max(Comparator.comparingInt(User::getAge));
+        if (max.isPresent()) {
+            //get to extract user from optional, it can be empty so first check if present
+            System.out.println(max.get());
+        } else {
+            System.out.println("No such element found");
+        }
+
+        String ala = users.stream()
+                .map(User::getFirstName)
+                .filter(s -> s.equals("Ala"))
+                .findFirst()
+                .orElse("There is no Ala on the list");
+        System.out.println(ala);
+
+        Integer age = users.stream()
+                .map(User::getAge)
+                .max(Integer::compareTo)
+                .orElse(-1);
+        System.out.println(age);
+
+        User bartek = users.stream()
+                .filter(user -> user.getFirstName().startsWith("Bart"))
+                .findFirst()
+                .orElseGet(() -> new User("Bartek", "Nowy", "b@test.com", 25));
+        System.out.println(bartek);
+
+//        User ula = users.stream()
+//                .filter(user -> user.getFirstName().startsWith("U"))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalStateException("There is no user with name starting with letter U on the list"));
+//        System.out.println(ula);
     }
 }
