@@ -2,8 +2,10 @@ import model.Bug;
 import model.BugReporter;
 import model.User;
 import model.computer.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -149,31 +151,80 @@ public class MainApp {
 //            System.out.println(entry.getKey() + " " + entry.getValue());
 //        }
         //exercise
-        List<Bug> bugsList = new ArrayList<>();
-        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
-                "clown@nt.no"), 1));
-        bugsList.add(new Bug("Some issue", new BugReporter("Bernard", "Clown",
-                "clown@nt.no"), 2));
-        bugsList.add(new Bug("500 error", new BugReporter("Arnold", "Crown",
-                "arn@nt.no"), 5));
-        bugsList.add(new Bug("S WORKING!!!", new BugReporter("Frank", "Slow",
-                "frank@test.pl"), 1));
-        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
-                "clown@nt.no"), 1));
-        for (Bug bug : bugsList) {
-            System.out.println(bug.getBugDescription());
-        }
-        System.out.println("set: ");
-        //we want to eliminate duplicates: (it won't work if we don't have equals and hash methods
-        Set<Bug> bugSet = new HashSet<>(bugsList);
-        for (Bug bug : bugSet) {
-            System.out.println(bug.getBugDescription());
-        }
-        //sort
-        Set<Bug> bugsTreeSet = new TreeSet<>(bugSet);
-        System.out.println("tree set:");
-        for (Bug bug : bugsTreeSet) {
-            System.out.println(bug.getBugDescription());
+//        List<Bug> bugsList = new ArrayList<>();
+//        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
+//                "clown@nt.no"), 1));
+//        bugsList.add(new Bug("Some issue", new BugReporter("Bernard", "Clown",
+//                "clown@nt.no"), 2));
+//        bugsList.add(new Bug("500 error", new BugReporter("Arnold", "Crown",
+//                "arn@nt.no"), 5));
+//        bugsList.add(new Bug("S WORKING!!!", new BugReporter("Frank", "Slow",
+//                "frank@test.pl"), 1));
+//        bugsList.add(new Bug("NOTHING IS WORKING!!!", new BugReporter("Bernard", "Clown",
+//                "clown@nt.no"), 1));
+//        for (Bug bug : bugsList) {
+//            System.out.println(bug.getBugDescription());
+//        }
+//        System.out.println("set: ");
+//        //we want to eliminate duplicates: (it won't work if we don't have equals and hash methods
+//        Set<Bug> bugSet = new HashSet<>(bugsList);
+//        for (Bug bug : bugSet) {
+//            System.out.println(bug.getBugDescription());
+//        }
+//        //sort
+//        Set<Bug> bugsTreeSet = new TreeSet<>(bugSet);
+//        System.out.println("tree set:");
+//        for (Bug bug : bugsTreeSet) {
+//            System.out.println(bug.getBugDescription());
+//        }
+        //stream
+        List<String> names = new ArrayList<>();
+        names.add("Pixie");
+        names.add("Pikuś");
+        names.add("Jess");
+        names.add("Chałka");
+        names.add("Macchi");
+        names.add("Bulwa");
+        names.add("Mela");
+        names.add("Piksi");
+        names.stream().filter(str -> str.startsWith("P"))
+                .filter(str -> str.contains("Pik"))
+                .filter((str -> str.endsWith("i")))
+                .forEach(str -> System.out.println(str));
+        List<String> pikNames = names.stream().filter(s -> s.startsWith("Pi")).collect(Collectors.toList());
+        System.out.println(pikNames);
+
+        names.stream()
+                .map(str -> str.toUpperCase())
+                .forEach(str -> System.out.println(str));
+
+        names.stream()
+                .filter(str -> str.length() <=4)
+                .map(str -> "Short name: " + str)
+                .forEach(str -> System.out.println(str));
+       long count = names.stream()
+                .filter(str -> str.length() <=4)
+                .count();
+        System.out.println("Count: " + count);
+        boolean anyMatch = names.stream().anyMatch(s -> s.contains("a"));
+        boolean allMatch = names.stream().allMatch(s -> s.length() > 3);
+        boolean noneMatch = names.stream().noneMatch(s -> s.endsWith("z"));
+        System.out.println(anyMatch + " " + allMatch + " " + noneMatch);
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("Ala", "Testowa", "ala@test.pl", 20));
+        users.add(new User("Ala", "Pomarańcz", "ala@test.pl", 20));
+        users.add(new User("Helena", "Xielona", "hela@test.pl", 28));
+        users.add(new User("Bożena", "Fioletowa", "boz@test.pl", 40));
+        users.add(new User("Kuba", "Biały", "kuba@test.pl", 35));
+        users.add(new User("Michał", "Czarny", "mich@test.pl", 31));
+
+        List<User> sortedUsers = users.stream()
+//                .sorted(Comparator.comparing(user -> user.getFirstName())) --> lambda can be replaced with method reference:
+                .sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName))
+                .collect(Collectors.toList());
+        for (User user : sortedUsers) {
+            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getAge());
         }
     }
 }
