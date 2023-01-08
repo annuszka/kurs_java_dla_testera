@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.IllegalEmailFormatException;
+
 import java.util.Objects;
 
 public class User implements Comparable<User> {
@@ -40,9 +42,10 @@ public class User implements Comparable<User> {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws IllegalEmailFormatException {
         if (!email.contains("@")) {
-            throw new IllegalArgumentException("Incorrect email format");
+//            throw new IllegalArgumentException("Incorrect email format");
+            throw new IllegalEmailFormatException("Provided incorrect email format");
         } else {
             this.email = email;
         }
